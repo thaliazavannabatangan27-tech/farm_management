@@ -52,6 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <h2 style="text-align:center;margin:0 0 12px">Farm Management</h2>
     <form method="post" action="">
         <label>Username</label>
+        <h1>TITE</h1>
         <input type="text" name="username" required>
         <label>Password</label>
         <input type="password" name="password" required>
