@@ -178,7 +178,7 @@ $res = mysqli_query($conn, "SELECT id, username, name, email, role FROM users OR
             <input type="password" name="password" required>
             <label>Role</label>
             <select name="role" required>
-                <option value="admin">Admin</option>
+                <option value="Admin">Admin</option>
                 <option value="user">User</option>
             </select>
             <button type="submit" class="submit">Add</button>
@@ -201,7 +201,7 @@ $res = mysqli_query($conn, "SELECT id, username, name, email, role FROM users OR
             <input type="email" name="email" required>
             <label>Role</label>
             <select name="role" required>
-                <option value="admin">Admin</option>
+                <option value="Admin">Admin</option>
                 <option value="user">User</option>
             </select>
             <button type="submit" class="submit">Save Changes</button>
