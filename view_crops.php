@@ -1,9 +1,9 @@
 <?php
 session_start();
-require_once "../includes/db_connect.php";
+require_once __DIR__ . "/includes/db_connect.php"; // FIXED PATH
 
-// Redirect if not logged in
-if (!isset($_SESSION['user_id'])) {
+// Use the SAME session name as dashboard.php
+if (!isset($_SESSION['id'])) {
     header("Location: ../index.php");
     exit;
 }
@@ -11,7 +11,13 @@ if (!isset($_SESSION['user_id'])) {
 $sql = "SELECT c.crop_id, c.crop_name, c.date_planted, c.expected_harvest, u.username 
         FROM crops c 
         JOIN users u ON c.user_id = u.user_id";
+
 $result = mysqli_query($conn, $sql);
+
+// SHOW SQL ERROR IF QUERY FAILS
+if (!$result) {
+    die("SQL ERROR: " . mysqli_error($conn));
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,6 +37,7 @@ $result = mysqli_query($conn, $sql);
     <div class="container">
         <h2>Crops List</h2>
         <a href="add_crop.php">➕ Add New Crop</a><br><br>
+
         <table>
             <tr>
                 <th>ID</th>
@@ -40,6 +47,7 @@ $result = mysqli_query($conn, $sql);
                 <th>Owner</th>
                 <th>Actions</th>
             </tr>
+
             <?php while ($row = mysqli_fetch_assoc($result)) : ?>
             <tr>
                 <td><?php echo $row['crop_id']; ?></td>
@@ -48,12 +56,14 @@ $result = mysqli_query($conn, $sql);
                 <td><?php echo $row['expected_harvest']; ?></td>
                 <td><?php echo $row['username']; ?></td>
                 <td>
-                    <a href="edit_crop.php?id=<?php echo $row['crop_id']; ?>">✏️ Edit</a> | 
+                    <a href="edit_crop.php?id=<?php echo $row['crop_id']; ?>">✏️ Edit</a> |
                     <a href="delete_crop.php?id=<?php echo $row['crop_id']; ?>" onclick="return confirm('Delete this crop?');">🗑️ Delete</a>
                 </td>
             </tr>
             <?php endwhile; ?>
+
         </table>
+
         <br>
         <a href="../dashboard.php">⬅ Back to Dashboard</a>
     </div>

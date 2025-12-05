@@ -43,7 +43,7 @@ $users_count = getCount($conn, 'users');
 
         <ul class="nav">
             <li class="active"><a href="#" data-page="dashboard_content.php">Dashboard</a></li>
-            <li><a href="#" data-page="crops/index.php">Crops</a></li>
+            <li><a href="#" data-page="view_crops.php">Crops</a></li>
             <li><a href="#" data-page="tasks/index.php">Tasks</a></li>
             <li><a href="#" data-page="resources/index.php">Resources</a></li>
             <li><a href="#" data-page="users.php">Users</a></li>
@@ -62,7 +62,8 @@ $users_count = getCount($conn, 'users');
             </header>
 
             <div class="cards">
-                <div class="card" data-page="./crops/view_crops">
+                <!-- FIXED HERE ↓↓↓ -->
+                <div class="card" data-page="./crops/view_crops.php">
                     <h3>Crops</h3>
                     <p class="count"><?php echo $crops_count; ?></p>
                     <a href="#" class="manage-link">Manage Crops</a>
@@ -260,11 +261,10 @@ $users_count = getCount($conn, 'users');
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.manage-link').forEach(link => {
                 link.addEventListener('click', function(e) {
-                    e.preventDefault(); // prevent default anchor jump
+                    e.preventDefault();
                     const card = this.closest('.card');
-                    const page = card.dataset.page; // get target page
+                    const page = card.dataset.page;
 
-                    // Example: load page content into a container
                     fetch(page)
                         .then(res => res.text())
                         .then(html => {
@@ -275,7 +275,6 @@ $users_count = getCount($conn, 'users');
             });
         });
     </script>
-
 
 </body>
 
